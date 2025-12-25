@@ -21,7 +21,7 @@ documents = [
 ]
 
 # The query to search for the most relevant document
-query = "who is the cricket known for best indian captain and who always looks cool and calm"
+query = "who is the cricket known for best indian captain and who always looks cool and calm ?"
 
 # Get the embedding vector for the query
 query_embedding = embeddings.embed_query(query)
@@ -36,7 +36,12 @@ similarity_scores = cosine_similarity([query_embedding], doc_embeddings)
 similarity_scores = similarity_scores[0]
 
 # Find the index of the document with the highest similarity score
-best_idx = int(np.argmax(similarity_scores))
+best_idx = 0
+best_score = similarity_scores[0]
+for i in range(0, len(similarity_scores)):
+    if similarity_scores[i] > best_score:
+        best_idx = i
+        best_score = similarity_scores[i]
 
 print("Most relevant document:")
 print(documents[best_idx])
