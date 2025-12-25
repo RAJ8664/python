@@ -22,4 +22,5 @@ python-dotenv
 numpy
 scikit-learn
 
-
+#Streamlit
+streamlit
