@@ -9,17 +9,7 @@ Prompts are the second core component of the LangChain framework. They are defin
 
 ---
 
-## 2. Important Correction: The Temperature Parameter
-
-In the previous lecture, it was mentioned that temperature ranges from 0 to 2, but its practical application for consistency was clarified here:
-
-- **Temperature = 0:** The model becomes **deterministic**. For the exact same input, it will always provide the exact same output.
-- **Temperature > 1 (e.g., 1.5):** The model becomes **creative**. Even with the same input, the output will vary significantly and be more "random" or imaginative.
-- **Application:** Use low temperature for factual tools and high temperature for creative writing tools.
-
----
-
-## 3. Static vs. Dynamic Prompts
+## 2. Static vs. Dynamic Prompts
 
 ### Static Prompts
 
@@ -35,7 +25,7 @@ These use **templates** with specific "fill-in-the-blank" placeholders.
 
 ---
 
-## 4. The `PromptTemplate` Class
+## 3. The `PromptTemplate` Class
 
 LangChain provides the `PromptTemplate` class to manage dynamic prompts.
 
@@ -49,7 +39,7 @@ While f-strings can work, `PromptTemplate` offers three major advantages:
 
 ---
 
-## 5. Building Chatbots and Managing History
+## 4. Building Chatbots and Managing History
 
 A basic chatbot needs to remember the context of the conversation. Without **Chat History**, the model cannot answer follow-up questions (e.g., "Multiply that number by 10") because it doesn't remember the "number" from the previous message.
 
@@ -65,7 +55,7 @@ By sending a **list of these labelled messages** as chat history, the model main
 
 ---
 
-## 6. Advanced Prompting Classes
+## 5. Advanced Prompting Classes
 
 ### ChatPromptTemplate
 
