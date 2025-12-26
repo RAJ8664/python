@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# This can be use as well.
+# This can be used as well.
 # class MyData(BaseModel):
 #     summary: Annotated[str, "Describe the summary"]
 #     key_points: Annotated[list[str], "List the key points"]
