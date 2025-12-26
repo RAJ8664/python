@@ -9,6 +9,10 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
+# OpenRouter
+# llm = ChatOpenAI(model="gpt-3.5-turbo")
+# llm = ChatOpenAI(model="deepseek/deepseek-r1-0528:free")
+
 # Initialize the Gemini language model (version 2.5 flash)
 llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 
