@@ -26,5 +26,3 @@ print(res)
 # Take a look at an example of the above template, we don't know the exact properties of the json output.
 # It may only mention name, age, city, or it may mention name, age, city, occupation, and so on.
 # This is the biggest challenge of using this output parser.
-# Hence we need another parser called as structured output parser.
-# Example Shown in Demo3.py
