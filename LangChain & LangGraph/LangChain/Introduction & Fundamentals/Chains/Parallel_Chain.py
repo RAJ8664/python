@@ -69,6 +69,8 @@ Consider a scenario
                    │  • Quiz            │
                    └────────────────────┘
 
+NOTE : It is not necessary to have differnet llm for each component, we can use the same llm for all components.
+
 """
 
 parser = StrOutputParser()
