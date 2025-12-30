@@ -1,4 +1,10 @@
 # Runnable Lambda
+"""
+RunnableLambda is a runnable primitive that allows you to apply custom Python functions within an AI pipeline.
+
+It acts as a middleware between different AI components, enabling preprocessing transformation, API calls, filtering and post processing in a langchain workflow.
+"""
+
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
