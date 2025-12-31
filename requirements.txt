@@ -28,3 +28,7 @@ streamlit
 
 # Drawing Chains
 grandalf
+
+# Pdf 
+pypdf
+bs4
