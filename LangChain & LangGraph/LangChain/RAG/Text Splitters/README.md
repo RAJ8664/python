@@ -1,5 +1,3 @@
-# LangChain Text Splitters: In-depth Tutorial Notes
-
 ## 1. Introduction to Text Splitting
 
 Text splitting is the second critical component in building **RAG (Retrieval Augmented Generation)** applications. It is the process of breaking down large documents—such as books, long PDFs, or HTML pages—into **smaller, manageable "chunks"** that a Large Language Model (LLM) can handle effectively.
