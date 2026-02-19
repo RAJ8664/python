@@ -67,27 +67,58 @@ The augmented prompt is sent to the LLM. The model uses its reasoning capabiliti
 
 ## 5. RAG Flow Diagram
 
-The following diagram illustrates the lifecycle of a RAG system as explained in the video:
+The following diagram illustrates the lifecycle of a RAG system:
 
-```markdown
-[ External Data Sources ]
-|
-v
-( 1. INDEXING )
-[ Load -> Chunk -> Embed -> Vector Store ]
-|
-| <--- ( User Query )
-v
-( 2. RETRIEVAL )
-[ Search Vector Store for Relevant Chunks ]
-|
-v
-( 3. AUGMENTATION )
-[ Combine: Query + Retrieved Context + System Prompt ]
-|
-v
-( 4. GENERATION )
-[ Send to LLM -> Final Grounded Response ]
+```mermaid
+
+flowchart TD
+
+%% ================================
+%% DATA INGESTION PIPELINE
+%% ================================
+
+A["External Sources (Websites / PDFs / Text Files / Wikipedia)"] --> B[Document Loader]
+
+B --> C[Raw Documents]
+
+C --> D[Text Splitter]
+
+D --> E1[Chunk 1]
+D --> E2[Chunk 2]
+D --> E3[Chunk 3]
+D --> E4[Chunk N]
+
+E1 --> F[Embedding Model]
+E2 --> F
+E3 --> F
+E4 --> F
+
+F --> G["Vector Store (Chroma / FAISS / Pinecone)"]
+
+%% ================================
+%% RETRIEVAL PIPELINE
+%% ================================
+
+H[User Query] --> I[Retriever]
+
+I -->|Semantic Search| G
+
+G --> J["Most Relevant Chunks (Context)"]
+
+%% ================================
+%% GENERATION PIPELINE
+%% ================================
+
+J --> K[Combine Context + Query]
+
+H --> K
+
+K --> L["Prompt Template: You are a helpful assistant... Context: {context} Question: {question}"]
+
+L --> M["LLM (OpenAI / Gemini / Local Model)"]
+
+M --> N[Final Answer]
+
 ```
 
 ---
