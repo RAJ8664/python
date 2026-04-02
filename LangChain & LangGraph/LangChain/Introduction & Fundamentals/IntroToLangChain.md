@@ -25,10 +25,10 @@ Using raw LLM APIs directly has limitations:
 - Prompt logic scattered across files
 - No memory of past interactions
 - Hard to connect LLMs with:
-    - APIs
-    - Databases
-    - Files
-    - Tools
+  - APIs
+  - Databases
+  - Files
+  - Tools
 
 - No structured flow or chaining of tasks
 
@@ -164,9 +164,9 @@ Agents are **decision-makers**.
 Instead of following a fixed chain:
 
 - The LLM decides:
-    - Which tool to use
-    - What action to take next
-    - When to stop
+  - Which tool to use
+  - What action to take next
+  - When to stop
 
 Example:
 
@@ -232,11 +232,11 @@ LangChain simplifies **each step**.
 - LangChain is **not an LLM**, it’s a **framework**
 - It helps build **structured LLM applications**
 - Core concepts:
-    - Prompts
-    - Chains
-    - Memory
-    - Tools
-    - Agents
+  - Prompts
+  - Chains
+  - Memory
+  - Tools
+  - Agents
 
 - Essential for **real-world AI apps**, not just demos
 
