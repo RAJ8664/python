@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 from langchain_community.document_loaders import TextLoader, PyPDFLoader
 from langchain_text_splitters import CharacterTextSplitter
 
+from Introduction import first
+
 load_dotenv()
 
 model = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.7)
