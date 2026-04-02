@@ -1,5 +1,6 @@
 from langchain_core.language_models import BaseChatModel
 from langchain_core.messages.ai import AIMessage
+from langchain_core.output_parsers import StrOutputParser
 
 
 class SimpleChat:
@@ -31,7 +32,13 @@ class SimpleChat:
 
         # NOTE: Fine tune prompt here if needed.
 
-        return str(self.chat_model.invoke(prompt))
+        parser = StrOutputParser()
+
+        chain = self.chat_model | parser
+
+        res = chain.invoke(prompt)
+
+        return res
 
     def get_complete_response(self, prompt: str | list[str]) -> AIMessage:
         """

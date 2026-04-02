@@ -11,10 +11,17 @@ from simple_embedding import SimpleEmbeddings
 
 
 class Similarity:
+    """
+    A simple class for similarity search.
+    """
+
     def __init__(self, embedding_model: Embeddings) -> None:
         self.embedding_model = embedding_model
 
-    def get_similar_document(self, documents: list[str], query: str):
+    def get_similar_document(self, documents: list[str], query: str) -> str:
+        """
+        Get the most similar document to the query from the list of documents.
+        """
         if isinstance(documents, list) and len(documents) == 0:
             raise ValueError("documents must not be empty")
 
