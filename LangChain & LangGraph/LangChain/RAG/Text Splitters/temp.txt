@@ -1,10 +1,1 @@
-def sum(a, b):
-    return a + b
-
-def sub(a, b): 
-    return a - b
-
-a = 5
-b = 6
-print(sum(a, b))
-print(sub(a, b))
+The Amazon rainforest, often referred to as the "lungs of the Earth," plays a crucial role in regulating the planet's climate and supports an extraordinary variety of wildlife, many of which are found nowhere else. Quantum computing, by leveraging the principles of quantum mechanics, promises to solve complex problems far beyond the reach of classical computers, potentially transforming industries such as cryptography, pharmaceuticals, and logistics. Quantum computing is a hard topic to learn when learning initially, but you will enjoy a lot. Engaging in regular physical activity not only strengthens the cardiovascular system and muscles but also has profound benefits for mental well-being, including reducing stress, improving mood, and enhancing cognitive function.
