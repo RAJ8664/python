@@ -1,3 +1,4 @@
+from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from dotenv import load_dotenv
 from langchain_community.tools import DuckDuckGoSearchResults, ShellTool
@@ -5,6 +6,7 @@ from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 from langchain.agents import create_agent
 from langchain_community.agent_toolkits.github.toolkit import GitHubToolkit
 from langchain_community.utilities.github import GitHubAPIWrapper
+from langchain.messages import SystemMessage, HumanMessage
 
 load_dotenv()
 
@@ -23,10 +25,7 @@ agent = create_agent(chat_model, tools)
 events = agent.stream(
     {
         "messages": [
-            {
-                "role": "user",
-                "content": "can you explain PR number 106, make it detailed",
-            }
+            HumanMessage(content="What is the current status of the project?"),
         ]
     },
     stream_mode="values",
