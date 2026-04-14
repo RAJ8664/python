@@ -5,6 +5,7 @@ from typing import Optional
 from typing_extensions import TypedDict
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
+from IPython.display import Image
 
 load_dotenv()
 model = ChatHuggingFace(llm=HuggingFaceEndpoint(model="deepseek-ai/DeepSeek-V3.2"))
@@ -32,7 +33,7 @@ graph = StateGraph(State)
 # Define all the nodes and add them to the graph
 
 
-def generate_report(state: State) -> dict:
+def generate_report(state: State) -> State:
     prompt = PromptTemplate(
         template="write me a brief report on topic: {topic}",
         input_variables=["topic"],
@@ -40,10 +41,11 @@ def generate_report(state: State) -> dict:
     parser = StrOutputParser()
     chain = prompt | model | parser
     res = chain.invoke({"topic": state["topic"]})
-    return {"report": res}
+    state["report"] = res
+    return state
 
 
-def generate_summary(state: State) -> dict:
+def generate_summary(state: State) -> State:
     prompt = PromptTemplate(
         template="write me a complete summary of the report: {report}",
         input_variables=["report"],
@@ -51,15 +53,16 @@ def generate_summary(state: State) -> dict:
     parser = StrOutputParser()
     chain = prompt | model | parser
     res = chain.invoke({"report": state["report"]})
-    return {"summary": res}
+    state["summary"] = res
+    return state
 
 
-# Add the nodes to the graph
+# Add nodes to the graph
 
-graph.add_node(generate_report)
-graph.add_node(generate_summary)
+graph.add_node("generate_report", generate_report)
+graph.add_node("generate_summary", generate_summary)
 
-# Add the Edges to the graph (accroding to your workflow)
+# Add Edges to the graph (accroding to your workflow)
 
 graph.add_edge(START, "generate_report")
 graph.add_edge("generate_report", "generate_summary")
@@ -71,8 +74,8 @@ app = graph.compile()
 
 # Execute the graph
 
-res = app.invoke(State({"topic": "python", "report": "", "summary": ""}))
+final_state = app.invoke(State({"topic": "python", "report": "", "summary": ""}))
 
-print(f"TOPIC: \n {res['topic']}\n")
-print(f"Report: \n {res['report']}\n")
-print(f"Summary: \n {res['summary']}\n")
+print(final_state)
+
+Image(app.get_graph().draw_png)
