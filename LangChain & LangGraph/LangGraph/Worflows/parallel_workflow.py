@@ -1,4 +1,5 @@
 # Parallelization
+# Read here -> https://docs.langchain.com/oss/python/langgraph/workflows-agents
 
 from langgraph.graph import START, END, StateGraph
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
@@ -70,18 +71,19 @@ parallel_builder.add_edge("call_llm_3", "aggregator")
 parallel_builder.add_edge("aggregator", END)
 parallel_workflow = parallel_builder.compile()
 
+# Invoke
+initial_state = State(
+    {
+        "topic": "cats",
+        "joke": "",
+        "story": "",
+        "poem": "",
+        "combined_output": "",
+    }
+)
+
+final_state = parallel_workflow.invoke(initial_state)
+print(final_state["combined_output"])
+
 # Show workflow
 display(Image(parallel_workflow.get_graph().draw_mermaid_png()))
-
-# Invoke
-initial_state = {
-    "topic": "cats",
-    "joke": "",
-    "story": "",
-    "poem": "",
-    "combined_output": "",
-}
-state = parallel_workflow.invoke(
-    State({"topic": "cats", "joke": "", "story": "", "poem": "", "combined_output": ""})
-)
-print(state["combined_output"])
