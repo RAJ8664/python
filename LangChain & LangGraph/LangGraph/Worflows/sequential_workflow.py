@@ -1,3 +1,5 @@
+# Prompt Chaining
+
 from dotenv import load_dotenv
 from langgraph.graph import START, END, StateGraph
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
@@ -5,7 +7,7 @@ from typing import Optional
 from typing_extensions import TypedDict
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from IPython.display import Image
+from IPython.display import Image, display
 
 load_dotenv()
 model = ChatHuggingFace(llm=HuggingFaceEndpoint(model="deepseek-ai/DeepSeek-V3.2"))
@@ -33,7 +35,7 @@ graph = StateGraph(State)
 # Define all the nodes and add them to the graph
 
 
-def generate_report(state: State) -> State:
+def generate_report(state: State) -> dict:
     prompt = PromptTemplate(
         template="write me a brief report on topic: {topic}",
         input_variables=["topic"],
@@ -41,11 +43,10 @@ def generate_report(state: State) -> State:
     parser = StrOutputParser()
     chain = prompt | model | parser
     res = chain.invoke({"topic": state["topic"]})
-    state["report"] = res
-    return state
+    return {"report": res}
 
 
-def generate_summary(state: State) -> State:
+def generate_summary(state: State) -> dict:
     prompt = PromptTemplate(
         template="write me a complete summary of the report: {report}",
         input_variables=["report"],
@@ -53,8 +54,7 @@ def generate_summary(state: State) -> State:
     parser = StrOutputParser()
     chain = prompt | model | parser
     res = chain.invoke({"report": state["report"]})
-    state["summary"] = res
-    return state
+    return {"summary": res}
 
 
 # Add nodes to the graph
@@ -78,4 +78,4 @@ final_state = app.invoke(State({"topic": "python", "report": "", "summary": ""})
 
 print(final_state)
 
-Image(app.get_graph().draw_png)
+display(Image(app.get_graph().draw_mermaid()))
